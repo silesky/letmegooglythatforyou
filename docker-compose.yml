@@ -1,0 +1,32 @@
+version: '3.2'
+services:
+  app:
+    restart: always
+    build: ./server
+    links:
+      - db:db
+    ports:
+      - 8000:8000
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./img:/app/img
+    stdin_open: true
+    # accessible in the flask container
+    environment:
+      DB_HOST_DOCKER: db
+      PGDB: lmgtfy
+      PGUSER: postgres
+  db:
+    image: postgres:10.1
+    environment:
+      POSTGRES_DB: lmgtfy
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      - "./schema.sql:/docker-entrypoint-initdb.d/1-schema.sql" # link schema
+    # this can be enabled during development, but we don't want to expose ports in production
+    #  ports:
+      # - 5432:5432
+volumes:
+  db-data:
+  img:
