@@ -375,10 +375,8 @@ async def get_image_slack(req):
             if json_res['ok']:
                 print(json(json_res))
                 user = json_res['profile']
-                if 'display_name' in user:
-                    display_name = '@' + user['display_name']
-                else:
-                    display_name = user['real_name']
+                display_name = (
+                    '@' + user['display_name']) if user.get('display_name') else user['real_name']
                 avatar_url = user.get('image_512') or user.get('image_192')
                 if not avatar_url:
                     return json('No suitable width image in requested user\'s profile.')
