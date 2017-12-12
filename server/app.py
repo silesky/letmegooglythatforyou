@@ -24,7 +24,7 @@ def draw_googly(image_name, faces):
         rect = face['faceRectangle']
         print('rectangle:', rect)
         eye = Image.open('eye.png')
-        eye.thumbnail((rect['width'] / 2.5, rect['height'] / 2.5))
+        eye.thumbnail((rect['width'] / 3, rect['height'] / 3))
         eye_size = eye.size[0]
         offset = int(eye_size / 2)
         eye_left_x = int(face['faceLandmarks']['pupilLeft']['x']) - offset
