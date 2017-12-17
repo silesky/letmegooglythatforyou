@@ -356,7 +356,9 @@ async def get_image_slack(req):
     print('url!', req.url)
     keyword = req.form.get('text')
     # check if req carries validation token
-    validation_token = req.form.get('token')
+    verification_token = req.form.get('token')
+    if verification_token != VERIFICATION_TOKEN:
+        return json('Unauthorized: mismatched verification token.')
     response_url = req.form.get('response_url')
     team_id = req.form.get('team_id')
     print('team_id:', team_id)

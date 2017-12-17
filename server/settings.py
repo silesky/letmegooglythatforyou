@@ -17,6 +17,7 @@ RAW_HOST = clean_host(HOST) # no http?s
 SSL_ENABLED = HOST.find('https') >= 0
 CLIENT_ID = environ.get('CLIENT_ID')
 CLIENT_SECRET = environ.get('CLIENT_SECRET')
+VERIFICATION_TOKEN = environ.get('VERIFICATION_TOKEN')
 DEFAULTIMGURL = 'http://image.boomsbeat.com/data/images/full/595/bill-gates-jpg.jpg'
 PGDB = environ.get('PGDB')
 PGUSER = environ.get('PGUSER')
