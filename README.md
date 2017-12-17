@@ -1,6 +1,6 @@
 # README
 
-
+![animated demo gif](./server/static/assets/img/demo.gif)
 ## Server
 ```
 - install python3.6
