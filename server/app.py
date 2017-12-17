@@ -64,6 +64,8 @@ def create_err(message):
 
 # serve any file in the /img folder
 app.static('/img', './img')
+# serve any static asset
+app.static('/assets', './static/assets')
 # map get requests from /support.html to static folder. (i.e. /support.html)
 app.static('/', './static/index.html')
 app.static('/privacy', './static/privacy.html')
