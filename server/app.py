@@ -128,7 +128,7 @@ async def slack_api_req(code):
 
 @app.get('/auth')
 async def authorize(req):
-    slack_oauth_url = 'https://slack.com/oauth/authorize?scope=commands,users:read,users.profile:read&client_id=' + CLIENT_ID
+    slack_oauth_url = 'https://slack.com/oauth/authorize?scope=commands,users.profile:read&client_id=' + CLIENT_ID
     return redirect(slack_oauth_url)
 
 
