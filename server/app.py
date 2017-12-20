@@ -269,7 +269,7 @@ async def create_googly_from_url(url):
 async def create_googly_from_kw(keyword):
     bing_image_search_res = await bing_image_search(keyword)
     # get random one
-    img_results = bing_image_search_res['value']
+    img_results = bing_image_search_res.get('value')
     if not img_results:
         return 'Unable to get Bing image search result, maybe API is down.'
     # if there are more than 10 items, choose the top 10, otherwise choose a random one.
