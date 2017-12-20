@@ -195,7 +195,7 @@ async def bing_image_search(keywords):
                 return json_res
             else:
                 print('Bing image search error API Error:', json_res);
-                return json_res('could not get image from bing image api.')
+                return 'could not get image from bing image api.'
 
 
 async def vision_api_req(url):
