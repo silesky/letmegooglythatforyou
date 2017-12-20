@@ -182,9 +182,7 @@ async def bing_image_search(keywords):
     }
     bing_image_search_req_params = {
         'q': keywords,
-        'encodingFormat': 'jpeg',
-        # (excluding line drawings, animated Gifs, and clip art)
-        'imageType': 'photo'
+        'encodingFormat': 'jpeg'
     }
     # with ke
     async with ClientSession(headers=bing_image_req_headers) as session:
@@ -196,8 +194,8 @@ async def bing_image_search(keywords):
             if resp.status == 200:
                 return json_res
             else:
-                print(resp)
-                raise Exception('could not get image from bing image api.')
+                print('Bing image search error API Error:', json_res);
+                return json_res('could not get image from bing image api.')
 
 
 async def vision_api_req(url):
