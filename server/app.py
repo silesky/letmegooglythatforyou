@@ -199,7 +199,7 @@ async def bing_image_search(keywords):
 
 
 async def vision_api_req(url):
-    vision_api_url = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze'
+    vision_api_url = 'https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze'
     vision_api_req_headers = {
         'Content-Type': 'application/json',
         'Ocp-Apim-Subscription-Key': API_KEY_VISION,
@@ -227,7 +227,7 @@ async def vision_api_req(url):
 
 
 async def face_api_req(url):
-    face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
+    face_api_url = 'https://eastus.api.cognitive.microsoft.com/face/v1.0/detect'
     face_api_req_headers = {
         'Content-Type': 'application/json',
         'Ocp-Apim-Subscription-Key': API_KEY_FACE,
@@ -271,7 +271,8 @@ async def create_googly_from_kw(keyword):
     # get random one
     img_results = bing_image_search_res.get('value')
     if not img_results:
-        return 'Unable to get Bing image search result, maybe API is down.'
+        print('Unable to get Bing image search result, maybe API is down.')
+        return False
     # if there are more than 10 items, choose the top 10, otherwise choose a random one.
     last_index = len(img_results) - 1
     # if Dev is on, always take the first item (makes debugging eye pos. easier)
