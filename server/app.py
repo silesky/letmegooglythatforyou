@@ -194,7 +194,7 @@ async def bing_image_search(keywords):
             if resp.status == 200:
                 return json_res
             else:
-                print('Bing image search error API Error:', json_res);
+                print('Bing image search error API Error:', json_res)
                 return json_res
 
 
@@ -351,9 +351,10 @@ def find_user_id(keyword):
 
 @app.post('/api/slack')
 async def get_image_slack(req):
-    print('slack endpoint hit!')
-    print('url!', req.url)
+    print('/api/slack hit. url:', req.url)
     keyword = req.form.get('text')
+    if not keyword:
+        return json('Please enter a search term (@friend or celebrity).')
     # check if req carries validation token
     verification_token = req.form.get('token')
     if verification_token != VERIFICATION_TOKEN:
@@ -363,8 +364,7 @@ async def get_image_slack(req):
     print('team_id:', team_id)
     user_id = find_user_id(keyword)
     if user_id:
-        print(keyword)
-        print('hello!')
+        print('Keyword:', keyword)
         access_token = await get_access_token_by_team_id(team_id)
         if not access_token:
             return json(
