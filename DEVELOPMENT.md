@@ -7,7 +7,7 @@
 - . venv/bin/activate
 - Run:
   - cd server && python3 app.py
-
+```
 ## Develop
 ```
 - create a self-signed cert via sh bootstrap.sh
