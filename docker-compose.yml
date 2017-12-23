@@ -10,9 +10,10 @@ services:
     env_file:
       - ./server/.env
     volumes:
-      - ./img:/app/img
+      - ./server/img:/app/img
+      - img-data:/app/img
     stdin_open: true
-    # accessible in the flask container
+    # make 'db' link accessible in the flask container
     environment:
       DB_HOST_DOCKER: db
       PGDB: lmgtfy
@@ -22,11 +23,11 @@ services:
     environment:
       POSTGRES_DB: lmgtfy
     volumes:
-      - "db-data:/var/lib/postgresql/data"
-      - "./schema.sql:/docker-entrypoint-initdb.d/1-schema.sql" # link schema
+      - ./schema.sql:/docker-entrypoint-initdb.d/1-schema.sql # link schema
+      - db-data:/var/lib/postgresql/data
     # this can be enabled during development, but we don't want to expose ports in production
     #  ports:
       # - 5432:5432
 volumes:
+  img-data:
   db-data:
-  img:
