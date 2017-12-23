@@ -184,7 +184,6 @@ async def bing_image_search(keywords):
         'q': keywords,
         'encodingFormat': 'jpeg'
     }
-    # with ke
     async with ClientSession(headers=bing_image_req_headers) as session:
         async with session.get(
             url=bing_image_api_url,
@@ -196,35 +195,6 @@ async def bing_image_search(keywords):
             else:
                 print('Bing image search error API Error:', json_res)
                 return json_res
-
-
-async def vision_api_req(url):
-    vision_api_url = 'https://eastus.api.cognitive.microsoft.com/vision/v1.0/analyze'
-    vision_api_req_headers = {
-        'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key': API_KEY_VISION,
-    }
-    vision_api_params = {
-        'visualFeatures': 'Faces, Description',
-    }
-    # request body looks like: {data: { url: ... }}
-    vision_api_req_body = {
-        'url': url,  # mandatory
-    }
-    async with ClientSession(headers=vision_api_req_headers) as session:
-        async with session.post(
-            url=vision_api_url,
-            params=vision_api_params,
-            data=dumps(vision_api_req_body)
-        ) as resp:
-            json_res = await resp.json()
-            json_res['sourceUrl'] = url
-            if resp.status == 200:
-                return json_res
-            else:
-                print(resp)
-                raise Exception('could not get image from ms vision api.')
-
 
 async def face_api_req(url):
     face_api_url = 'https://eastus.api.cognitive.microsoft.com/face/v1.0/detect'
@@ -291,13 +261,6 @@ def create_slack_image_json_res(label, imageurl):
         ],
         'unfurl_media': True
     })
-
-
-@app.post('/api/debug')
-async def get_image_debug(req):
-    res = await vision_api_req(DEFAULTIMGURL)
-    return create_res(res)
-
 
 @app.post('/api/image')
 async def get_image(req):

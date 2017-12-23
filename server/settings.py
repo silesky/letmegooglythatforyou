@@ -24,7 +24,6 @@ PGUSER = environ.get('PGUSER')
 DB_HOST = environ.get('DB_HOST_DOCKER') or RAW_HOST
 API_KEY_BING = environ.get('API_KEY_BING')
 API_KEY_FACE = environ.get('API_KEY_FACE')
-API_KEY_VISION = environ.get('API_KEY_VISION')
 IMAGE_SERVER_HOST = environ.get('IMAGE_SERVER_BASE')
 
 if DEV == 'TRUE':
